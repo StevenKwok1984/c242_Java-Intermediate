@@ -19,7 +19,7 @@ public class App {
      * @param trampolines The number of trampolines
      * @return boolean indicating if the llams are happy
      */
-
+    /*
     public static void main(String[] args) {
         int trampolines;
         boolean ultraBouncy;
@@ -47,6 +47,8 @@ public class App {
         } while (keepGoing);
 
     }
+    */
+
 
     public static boolean areTheLlamasHappy(boolean ultraBouncy, int trampolines) {
         boolean happy;
