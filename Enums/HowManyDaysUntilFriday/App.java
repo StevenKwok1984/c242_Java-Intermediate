@@ -10,7 +10,10 @@ public class App {
         System.out.println("Enter a day of the week: ");
         String dayInput = sc.nextLine();
         DayOfWeek day = DayOfWeek.valueOf(dayInput.toUpperCase(Locale.ROOT));
-        int dayUnitFri = daysUntilFriday(day);
+        int numOfDays = daysUntilFriday(day);
+
+        // Print the result
+        System.out.println("The remaining day(s) until Friday is: " + numOfDays);
     }
 
     public static int daysUntilFriday(DayOfWeek day) throws UnsupportedDayOfWeekException {
@@ -30,7 +33,7 @@ public class App {
             case SATURDAY:
                 return 6;
             default:
-                throw new UnsupportedDayOfWeekException();
+                throw new UnsupportedDayOfWeekException("Error: Input is incorrect");
         }
     }
 }
