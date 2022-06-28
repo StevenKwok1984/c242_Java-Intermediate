@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Calculator {
 
-    public static void main(String[] args) {
+    public void calculate() {
 
         // Opening
         System.out.println("Welcome to the Magical BirthDAY Calculator!");
