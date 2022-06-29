@@ -17,8 +17,8 @@ public class InterestCalculator {
         for (BigDecimal i = BigDecimal.ONE; i.compareTo(year) <= 0; i = i.add(BigDecimal.ONE)) {
 
             System.out.println("Year "+ i +":");
-            BigDecimal showInvestAmount = investAmount;
-            System.out.println("Began with $" +showInvestAmount);
+            BigDecimal showBeginAmount = investAmount.setScale(2, RoundingMode.HALF_EVEN);
+            System.out.println("Began with $" +showBeginAmount);
 
             // amount earned
             BigDecimal currentBalance = investAmount;
@@ -26,11 +26,13 @@ public class InterestCalculator {
             currentBalance = getQuarterBalance(currentBalance, interestRate);
 
             BigDecimal earn = currentBalance.subtract(investAmount);
-            System.out.println("Earned " + (earn));
+            BigDecimal showEarn = earn.setScale(2, RoundingMode.HALF_EVEN);
+            System.out.println("Earned " + showEarn);
             // Ended with
             //currentBalance = newBalance;
             investAmount = investAmount.add(earn);
-            System.out.println("Ended with " + investAmount);
+            BigDecimal showAfterAmounnt = investAmount.setScale(2, RoundingMode.HALF_EVEN);
+            System.out.println("Ended with " + showAfterAmounnt);
             System.out.println();
         }
 
