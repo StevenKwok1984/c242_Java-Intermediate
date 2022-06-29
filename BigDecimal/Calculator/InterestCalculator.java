@@ -1,43 +1,45 @@
 package BigDecimal.Calculator;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class InterestCalculator {
 
     public void calculating() {
 
-        float investAmount = readValue("How much do you want to invest? ");
-        float year = readValue("How many years are investing? ");
-        float interestRate = readValue("What is the annual interest rate % growth? ");
+        BigDecimal investAmount = readValue("How much do you want to invest? ");
+        BigDecimal year = readValue("How many years are investing? ");
+        BigDecimal interestRate = readValue("What is the annual interest rate % growth? ");
 
         bannerOfCalculating();
 
-        for (int i = 1; i <= year; i ++) {
+        for (BigDecimal i = BigDecimal.ONE; i.compareTo(year) <= 0; i = i.add(BigDecimal.ONE)) {
 
             System.out.println("Year "+ i +":");
-            System.out.println("Began with $" + investAmount);
+            BigDecimal showInvestAmount = investAmount;
+            System.out.println("Began with $" +showInvestAmount);
 
             // amount earned
-            float currentBalance = investAmount;
+            BigDecimal currentBalance = investAmount;
 
             currentBalance = getQuarterBalance(currentBalance, interestRate);
 
-            float earn = currentBalance - investAmount;
+            BigDecimal earn = currentBalance.subtract(investAmount);
             System.out.println("Earned " + (earn));
             // Ended with
             //currentBalance = newBalance;
-            investAmount += earn;
+            investAmount = investAmount.add(earn);
             System.out.println("Ended with " + investAmount);
             System.out.println();
         }
 
     }
 
-    public static float readValue(String prompt){
+    public static BigDecimal readValue(String prompt){
         Scanner sc = new Scanner(System.in);
         System.out.print(prompt);
-        String stringNum = sc.nextLine();
-        float number = Float.parseFloat(stringNum);
+        BigDecimal number = sc.nextBigDecimal();
         return number;
     }
 
@@ -46,9 +48,25 @@ public class InterestCalculator {
         System.out.println("Calculating...");
     }
 
-    public static float getQuarterBalance(float currentBalance, float interestRate) {
-        for (int j = 0; j < 4; j++){
-            float newBalance = currentBalance * (1 + ((interestRate / 4) / 100));
+    public static BigDecimal getQuarterBalance(BigDecimal currentBalance, BigDecimal interestRate) {
+        // number for the for() loop
+        BigDecimal end = BigDecimal.valueOf(4);
+        for (BigDecimal j = BigDecimal.ZERO; j.compareTo(end) < 0; j=j.add(BigDecimal.ONE)){
+
+            /*
+            Entire Formula
+             */
+            // for quartered rate
+            BigDecimal forDivide = BigDecimal.valueOf(4);
+            BigDecimal quarterRate = interestRate.divide(forDivide, 4, RoundingMode.HALF_EVEN);
+            // for creating percentage
+            BigDecimal percent = BigDecimal.valueOf(100);
+            BigDecimal quarterRatePercentage = quarterRate.divide(percent, 4, RoundingMode.HALF_EVEN);
+            // for + 1
+            BigDecimal qRPercentagePlusOne = quarterRatePercentage.add(BigDecimal.ONE);
+
+            // Final formula
+            BigDecimal newBalance = currentBalance.multiply(qRPercentagePlusOne);
             currentBalance = newBalance;
         }
 
