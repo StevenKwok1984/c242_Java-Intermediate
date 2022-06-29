@@ -33,8 +33,8 @@ public class App {
         c = op1.divide(op2, 2, RoundingMode.HALF_UP);
         System.out.println(c.toString());
 
-        c =
-
+        c = op1.divide(op2, 2, RoundingMode.DOWN);
+        System.out.println(c.toString());
 
     }
 }
