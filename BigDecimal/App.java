@@ -15,11 +15,11 @@ public class App {
 
         // Setting Scale With Rounding Mode HALF_UP
         BigDecimal b = a.setScale(1, RoundingMode.HALF_UP);
-        System.out.println(b.toString()); // 42.2
+        // System.out.println(b.toString()); // 42.2
 
         // Setting Scale With Rounding Mode HALF_DOWN
         b = a.setScale(1, RoundingMode.HALF_DOWN);
-        System.out.println(b.toString()); // 42.3
+        // System.out.println(b.toString()); // 42.3
 
         // Division With No Rounding Mode
         BigDecimal op1 = new BigDecimal("10");
@@ -27,7 +27,13 @@ public class App {
         // BigDecimal c = op1.divide(op2);
 
         // Division with Various Rounding Modes
+        BigDecimal c = op1.divide(op2, RoundingMode.HALF_UP);
+        System.out.println(c.toString());
 
+        c = op1.divide(op2, 2, RoundingMode.HALF_UP);
+        System.out.println(c.toString());
+
+        c =
 
 
     }
